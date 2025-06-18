@@ -1,0 +1,92 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    text-align: center;
+    background: #f0f2f5;
+}
+
+h1 {
+    font-size: 36px;
+}
+
+input {
+    font-size: 20px;
+    padding: 10px;
+    width: 400px;
+    margin-bottom: 15px;
+}
+
+button {
+    font-size: 20px;
+    padding: 10px 20px;
+    margin: 0 10px 15px 10px;
+    cursor: pointer;
+}
+
+button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+#graphContainer {
+    margin-top: 30px;
+    border: 1px solid #ccc;
+    background: white;
+}
+
+.edge {
+    stroke: #3498db;
+    stroke-width: 4;
+}
+
+.highlight-edge {
+    stroke: #9b59b6 !important;
+    /* Purple for explored edge */
+}
+
+.node {
+    fill: #3498db;
+    stroke: black;
+    stroke-width: 2;
+}
+
+.highlight-current {
+    fill: #f39c12 !important;
+    /* Orange for current node */
+}
+
+.highlight-visited {
+    fill: #2ecc71 !important;
+    /* Green for visited nodes */
+}
+
+.node-label {
+    font-size: 20px;
+    fill: black;
+    font-weight: bold;
+    user-select: none;
+}
+
+#log {
+    margin-top: 30px;
+    height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 15px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    font-family: monospace;
+    font-size: 18px;
+    background: white;
+    user-select: none;
+}
+
+#currentTraversal,
+#finalTraversal {
+    font-family: monospace;
+    color: #2c3e50;
+    font-weight: bold;
+    font-size: 24px;
+}

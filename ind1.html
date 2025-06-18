@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DFS Visualizer (Large Format)</title>
+    <link rel="stylesheet" href="sty1.css">
+</head>
+
+<body>
+    <h1>Depth-First Search Visualizer</h1>
+    <div>
+        <input id="graphInput" type="text" placeholder="Enter graph (e.g., 0:1,2; 1:0,3; 2:0,3; 3:1,2)">
+        <br>
+        <button id="startBtn">Start</button>
+        <button id="nextBtn" disabled>Next Step</button>
+    </div>
+    <div id="currentTraversal" style="margin-top: 20px; font-size: 24px;"></div>
+    <svg id="graphContainer" width="800" height="400"></svg>
+    <div id="finalTraversal" style="margin-top: 20px; font-size: 24px;"></div>
+    <div id="log"></div>
+    <script src="hi1.js"></script>
+</body>
+
+</html>

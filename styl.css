@@ -7,21 +7,17 @@ body {
 
 h1 {
     font-size: 36px;
-    /* Larger title */
 }
 
 input {
     font-size: 20px;
-    /* Larger input text */
     padding: 10px;
     width: 400px;
-    /* Wider input field */
     margin-bottom: 15px;
 }
 
 button {
     font-size: 20px;
-    /* Larger button text */
     padding: 10px 20px;
     margin: 0 10px 15px 10px;
     cursor: pointer;
@@ -37,19 +33,15 @@ button:disabled {
     justify-content: center;
     margin-top: 30px;
     height: 400px;
-    /* Increased height for larger bars */
     align-items: flex-end;
     gap: 10px;
-    /* Wider gap between bars */
 }
 
 .bar {
     position: relative;
     width: 50px;
-    /* Wider bars */
     background-color: #3498db;
     border-radius: 6px 6px 0 0;
-    /* Slightly larger border radius */
     transition: background-color 0.4s ease;
     color: black;
     font-weight: bold;
@@ -59,44 +51,39 @@ button:disabled {
 .bar span {
     position: absolute;
     top: -40px;
-    /* Adjusted for larger bars */
     width: 100%;
     font-size: 20px;
-    /* Larger number labels */
     text-align: center;
     user-select: none;
 }
 
-.highlight-left {
+.highlight-pivot {
+    background-color: #e74c3c !important;
+    /* Red for pivot */
+}
+
+.highlight-compare {
     background-color: #f39c12 !important;
-    /* Orange for left subarray */
+    /* Orange for compared elements */
 }
 
-.highlight-right {
-    background-color: #9b59b6 !important;
-    /* Purple for right subarray */
-}
-
-.highlight-merge {
+.highlight-sorted {
     background-color: #2ecc71 !important;
-    /* Green for merged part */
+    /* Green for sorted elements */
 }
 
 #log {
     margin-top: 30px;
     height: 200px;
-    /* Larger log area */
     overflow-y: auto;
     border: 1px solid #ccc;
     padding: 15px;
     max-width: 800px;
-    /* Wider log area */
     margin-left: auto;
     margin-right: auto;
     text-align: left;
     font-family: monospace;
     font-size: 18px;
-    /* Larger log text */
     background: white;
     user-select: none;
 }
@@ -107,5 +94,4 @@ button:disabled {
     color: #2c3e50;
     font-weight: bold;
     font-size: 24px;
-    /* Larger array display text */
 }
