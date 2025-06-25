@@ -4,22 +4,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Merge Sort Visualizer (Large Format)</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Mid-Point Circle Drawing Algorithm</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <h1>Merge Sort Visualizer</h1>
-    <div>
-        <input id="arrayInput" type="text" placeholder="Enter numbers separated by commas (e.g., 5,2,8,12,1)">
-        <br>
-        <button id="startBtn">Start</button>
-        <button id="nextBtn" disabled>Next Step</button>
+    <div class="background-animation"></div>
+    <header>
+        <nav>
+            <h1>Mid-Point Circle Drawing Algorithm</h1>
+            <div class="nav-links">
+                <a href="#definition">Definition</a>
+                <a href="#use-cases">Use Cases</a>
+                <a href="#algorithm">How It Works</a>
+                <a href="#visualization">Visualization</a>
+                <a href="#developer">Developer</a>
+                <button id="darkModeToggle" class="btn">Toggle Dark Mode</button>
+                <button id="showTutorial" class="btn">Tutorial</button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <section id="definition">
+            <h2>Definition</h2>
+            <p>The Mid-Point Circle Drawing Algorithm is an efficient method in computer graphics to draw circles on a pixel grid using only integer arithmetic. It leverages the circle's 8-way symmetry to minimize calculations, making it fast and suitable
+                for real-time applications.</p>
+        </section>
+
+        <section id="use-cases">
+            <h2>Use Cases</h2>
+            <ul>
+                <li><strong>Game Development</strong>: Rendering circular objects like wheels, coins, or planets.</li>
+                <li><strong>Computer-Aided Design (CAD)</strong>: Designing circular components in engineering software.</li>
+                <li><strong>UI Animation Systems</strong>: Creating smooth circular animations for buttons or loading spinners.</li>
+                <li><strong>2D Graphics Rendering</strong>: Drawing circles in tools like Photoshop or vector graphics editors.</li>
+            </ul>
+        </section>
+
+        <section id="algorithm">
+            <h2>How the Algorithm Works</h2>
+            <p>The Mid-Point Circle Drawing Algorithm is used to determine the pixels needed to draw a circle on a raster display. It avoids floating-point calculations and uses a decision parameter to choose the next pixel, making it efficient for hardware
+                implementation.
+            </p>
+            <h3>Step-by-Step Process</h3>
+            <ol>
+                <li><strong>Initialization</strong>: For a circle centered at (xc, yc) with radius r, start at point (0, r). The initial decision parameter is p = 1 - r.</li>
+                <li><strong>8-Way Symmetry</strong>: For each point (x, y), plot 8 symmetric points to cover all octants: (x,y), (-x,y), (x,-y), (-x,-y), (y,x), (-y,x), (y,-x), (-y,-x).</li>
+                <li><strong>Decision Parameter Update</strong>: Based on the value of p, decide whether to move to the next pixel horizontally or diagonally (reducing y).</li>
+                <li><strong>Iteration</strong>: Continue until x ≥ y, covering the first octant (the rest are symmetric).</li>
+            </ol>
+            <h3>Mathematical Equations</h3>
+            <div class="formulas">
+                <p><strong>Circle Equation</strong>: x² + y² = r²</p>
+                <p><strong>Initial Decision Parameter</strong>: p₀ = 1 - r</p>
+                <p><strong>Update Rules</strong>:</p>
+                <ul>
+                    <li>If p
+                        < 0: Next point is (x+1, y), and p=p + 2x + 3</li>
+                            <li>If p ≥ 0: Next point is (x+1, y-1), and p = p + 2x - 2y + 5</li>
+                </ul>
+                <p><strong>Symmetry Points</strong>: For a point (x, y), plot: (xc ± x, yc ± y), (xc ± y, yc ± x)</p>
+            </div>
+            <h3>Advantages</h3>
+            <ul>
+                <li>Uses only integer arithmetic, making it fast.</li>
+                <li>Exploits symmetry to reduce calculations.</li>
+                <li>Suitable for low-resource environments.</li>
+            </ul>
+            <h3>Limitations</h3>
+            <ul>
+                <li>Limited to circular shapes (not ellipses).</li>
+                <li>Pixel-based, so may appear jagged at low resolutions.</li>
+            </ul>
+        </section>
+
+        <section id="visualization">
+            <h2>Interactive Visualization</h2>
+            <p>Use the controls below to draw a circle step-by-step. Watch how the algorithm plots points using 8-way symmetry!</p>
+            <div class="canvas-container">
+                <canvas id="circleCanvas" width="400" height="400"></canvas>
+                <div class="controls">
+                    <div class="input-group">
+                        <label class="tooltip">Radius<span class="tooltiptext">Enter the circle's radius (10-150 pixels)</span></label>
+                        <input type="number" id="radius" value="50" min="10" max="150">
+                    </div>
+                    <div class="input-group">
+                        <label class="tooltip">Center X<span class="tooltiptext">X-coordinate of circle's center</span></label>
+                        <input type="number" id="centerX" value="200">
+                    </div>
+                    <div class="input-group">
+                        <label class="tooltip">Center Y<span class="tooltiptext">Y-coordinate of circle's center</span></label>
+                        <input type="number" id="centerY" value="200">
+                    </div>
+                    <div class="input-group">
+                        <label class="tooltip">Speed<span class="tooltiptext">Control animation speed</span></label>
+                        <select id="speed">
+                            <option value="1000">Slow</option>
+                            <option value="500" selected>Normal</option>
+                            <option value="200">Fast</option>
+                        </select>
+                    </div>
+                    <button id="startBtn" class="btn tooltip">Start Drawing<span class="tooltiptext">Begin the circle drawing animation</span></button>
+                    <button id="nextBtn" class="btn tooltip">Next Step<span class="tooltiptext">Show next point in algorithm</span></button>
+                    <button id="prevBtn" class="btn tooltip">Previous Step<span class="tooltiptext">Show previous point</span></button>
+                    <button id="resetBtn" class="btn tooltip">Reset<span class="tooltiptext">Clear canvas and reset</span></button>
+                    <button id="exportBtn" class="btn tooltip">Export PNG<span class="tooltiptext">Download the drawing as PNG</span></button>
+                    <div class="info-box">
+                        <p>Current Point: <span id="currentPoint">-</span></p>
+                        <p>Decision Parameter: <span id="decisionParam">-</span></p>
+                        <p id="explanation">-</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="developer">
+            <h2>Developer</h2>
+            <div class="developer-container">
+                <div class="developer-profile">
+                    <img src="shahriar.jpg" alt="Shariar Marjan" class="developer-img">
+                    <p><strong>Developer</strong>: Shariar Marjan</p>
+                </div>
+                <div class="developer-profile">
+                    <img src="download.jpg" alt="Md. Abu Rayan" class="developer-img">
+                    <p><strong>Supervisor</strong>: Md. Abu Rayan, Lecturer, Daffodil International University</p>
+                </div>
+                <p>This project was developed as part of an educational initiative at Daffodil International University to teach computer graphics concepts interactively.</p>
+            </div>
+        </section>
     </div>
-    <div id="currentArray" style="margin-top: 20px; font-size: 24px;"></div>
-    <div id="barContainer" class="bar-container"></div>
-    <div id="finalArray" style="margin-top: 20px; font-size: 24px;"></div>
-    <div id="log"></div>
+
+    <div id="tutorialModal" class="modal">
+        <div class="modal-content">
+            <h2>How to Use This Site</h2>
+            <p>Welcome to the Mid-Point Circle Drawing Algorithm Website! This interactive tool helps you understand how circles are drawn in computer graphics.</p>
+            <h3>Steps to Explore:</h3>
+            <ol>
+                <li><strong>Input Parameters</strong>: In the Visualization section, enter the radius and center coordinates (xc, yc).</li>
+                <li><strong>Start Animation</strong>: Click "Start Drawing" to see the algorithm plot points automatically.</li>
+                <li><strong>Step-by-Step Control</strong>: Use "Next Step" and "Previous Step" buttons or arrow keys to move through the algorithm manually.</li>
+                <li><strong>Adjust Speed</strong>: Choose Slow, Normal, or Fast from the speed dropdown.</li>
+                <li><strong>Export Your Work</strong>: Click "Export PNG" to download the drawn circle.</li>
+                <li><strong>Learn More</strong>: Explore the "How It Works" section for detailed explanations and equations.</li>
+            </ol>
+            <button id="closeTutorial" class="btn">Close</button>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 
